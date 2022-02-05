@@ -20,16 +20,19 @@ form.addEventListener("submit", function (x)  {
     // passwordCOntrol(password.value , repassword.value);
     checkLenght(password , 15 , 7);
     emailValidator();
+    checkPasswords(password.value , repassword.value)
+    userNameLength(userName.value , 5 , 20);
     x.preventDefault();
+
 } )
 
 //CHECH PASSWORDS SAME 
 
- /*
- function passwordCOntrol(first , second) {
- } */
-
-
+function checkPasswords (firstPassword ,secondPassword) {
+    if (firstPassword !== secondPassword) {
+        alert("passwords did not match");
+    }
+}
 
 
 //Chech PassWords Lenght
@@ -44,6 +47,18 @@ function checkLenght (input , maximum, minimum ){
             message[3].innerHTML = "";
         }
  }
+ //CHECK USER NAMELENGTH CONTROL
+
+ function userNameLength (input, minimum , maximum) {
+     if ( input.length > maximum) {
+         message[2].innerHTML = "max 20 character"
+     } else if ( input.length < minimum) {
+         message[2].innerHTML = "min 5 character"
+     } else if (input.length < maximum && input.length > minimum || input.length == 5 || input.length == 20) {
+         message[2].innerHTML = "";
+     }
+
+ }
 
 
 // İS EMAİL REAL VALİDATOR
@@ -57,11 +72,15 @@ function validateEmail(stringData) {
 
 
 
-function emailValidator ( ) {
+function emailValidator () {
     if(!validateEmail(email.value) ) {
-        alert("Check your E-mail Adress");
+        if(email.value == "") {
+            message[6].innerHTML = ("Enter e-mail Adress")
+        }else{
+            message[6].innerHTML = ("Check your E-mail Adress");
+            email.setAttribute("placeholder" , email.value + " is not a address")
         email.value = "";
-        email.className = "error"
+        email.className = "error"}
     }
 }
 function error (i) {
