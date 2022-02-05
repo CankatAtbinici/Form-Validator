@@ -12,9 +12,6 @@ let submit = document.getElementById("submitBtn");
 let message = document.querySelectorAll("td.message");
 
 
-console.log(message);
-
-
 form.addEventListener("submit", function (x)  {
     checkFormElement ([name , lastName , userName , password , repassword , phoneNumber , email]);
     // passwordCOntrol(password.value , repassword.value);
@@ -30,16 +27,21 @@ form.addEventListener("submit", function (x)  {
 } )
 
 //CHECH PASSWORDS SAME 
-
 function checkPasswords (firstPassword ,secondPassword) {
     if (firstPassword !== secondPassword) {
         alert("passwords did not match");
         error(password);
         error(repassword);
     }else if(firstPassword == secondPassword) {
-        for(let i =3 ; i <5; i++) {
-            message[i].innerHTML = "password is OK !";
-            message[i].setAttribute( "class" , "greenText");
+        if( (firstPassword === "" )|| (secondPassword === "" ) ) {
+            for(let a =3 ; a <5; a++) {
+                message[a].innerHTML = "";
+            } 
+        }else{ 
+                for(let i =3 ; i <5; i++) {
+                 message[i].innerHTML = "password is OK !";
+                 message[i].setAttribute( "class" , "greenText");
+            }
         }
     }
 }
@@ -82,7 +84,7 @@ function validateEmail(stringData) {
 }
 
 
-
+// E MAİL VALİDATİON AND MESSAGES
 function emailValidator () {
     if(validateEmail(email.value)) {
         message[6].innerHTML = ("valid e-mail address");
@@ -132,80 +134,25 @@ function checkPhoneNumber (input) {
         
 }
 
-//Every system needs some funny we do that with name of user 
+//Every system needs some funny we do that with name of user :) 
 
 function nameFunny (i) {
     if (name.value.length !== 0) {
         message[0].setAttribute("class" , "greenText")
         message[0].innerHTML = (" What a beatiful name " + i.value + " :)") 
-
     }
-
-
 }
 
 function lastNameFunny (i) {
-
     if(lastName.value.length !== 0) {
-        message[1].setAttribute("class" , "greenText") 
-        message[1].innerHTML = ("I think we are not relative :) ")
-    }
-  
+        if (lastName.value === "Atbinici") {
+            message[1].innerHTML = ("May be we relative each other :) ")
+            message[1].setAttribute("class" , "greenText") 
+        }else{
+            message[1].setAttribute("class" , "greenText") 
+            message[1].innerHTML = ("I think we are not relative :) ")}  
+    } 
 }
-
-        /*
-//if no data or wrong data in form area = bordercolor going to be red and alert 
-//LONG WAY
-
-function error (i) {
-    i.className = "error"
-  }
-
-form.addEventListener("submit" , function(e) {
-if(name.value === ""){
-    error(name);
-}else{
-    name.className = ""
-}
-if(lastName.value === ""){
-    error(lastName);
-}else{
-    lastName.className = ""
-}
-if(userName.value === ""){
-    error(userName);
-}else{
-    userName.className = ""
-}
-if(password.value === ""){
-    error(password);
-}else{
-    password.className = ""
-}
-if(repassword.value === ""){
-    error(repassword);
-}else{
-    repassword.className = ""
-}
-if(phoneNumber.value === ""){
-    error(phoneNumber);
-}else{
-    phoneNumber.className = ""
-}
-if(email.value === ""){
-    error(email);
-}else if (!validateEmail(email.value)){
-    alert("Check your E-mail Adress");
-}else{
-    email.className = "";
-}
-
-e.preventDefault();
-}) */
-
- 
-
-
 
 
 
