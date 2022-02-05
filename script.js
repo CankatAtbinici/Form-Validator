@@ -22,6 +22,9 @@ form.addEventListener("submit", function (x)  {
     emailValidator();
     checkPasswords(password.value , repassword.value)
     userNameLength(userName.value , 5 , 20);
+    checkPhoneNumber(phoneNumber);
+    nameFunny(name);
+    lastNameFunny();
     x.preventDefault();
 
 } )
@@ -31,6 +34,13 @@ form.addEventListener("submit", function (x)  {
 function checkPasswords (firstPassword ,secondPassword) {
     if (firstPassword !== secondPassword) {
         alert("passwords did not match");
+        error(password);
+        error(repassword);
+    }else if(firstPassword == secondPassword) {
+        for(let i =3 ; i <5; i++) {
+            message[i].innerHTML = "password is OK !";
+            message[i].setAttribute( "class" , "greenText");
+        }
     }
 }
 
@@ -55,7 +65,8 @@ function checkLenght (input , maximum, minimum ){
      } else if ( input.length < minimum) {
          message[2].innerHTML = "min 5 character"
      } else if (input.length < maximum && input.length > minimum || input.length == 5 || input.length == 20) {
-         message[2].innerHTML = "";
+         message[2].innerHTML = "valid Username";
+         message[2].setAttribute("class" , "greenText");
      }
 
  }
@@ -73,6 +84,10 @@ function validateEmail(stringData) {
 
 
 function emailValidator () {
+    if(validateEmail(email.value)) {
+        message[6].innerHTML = ("valid e-mail address");
+        message[6].setAttribute("class" , "greenText");
+    }
     if(!validateEmail(email.value) ) {
         if(email.value == "") {
             message[6].innerHTML = ("Enter e-mail Adress")
@@ -83,9 +98,12 @@ function emailValidator () {
         email.className = "error"}
     }
 }
+
+// SET ERROR CLASS
 function error (i) {
     i.className = "error";
 }
+
 // checking no empty space in form // Used forEach but other method staying comment under the this function
 function checkFormElement(e) {
     e.forEach(function (input) {
@@ -95,6 +113,44 @@ function checkFormElement(e) {
              input.className = "success";
          }
     })
+}
+ //  CHECK PHONE NUMBER
+function checkPhoneNumber (input) {
+
+    regExp = /^\d{10}$/;
+    if ( !regExp.test(input.value)) {
+        if(phoneNumber.value == 0 ) {
+            message[5].innerHTML = ("Enter a phone number")
+        }else{
+            message[5].innerHTML = ("invalid phone number");
+            error(phoneNumber);
+        }
+    } else if( regExp.test(input.value)) {
+        message[5].innerHTML = ("valid phone number");
+        message[5].setAttribute("class", "greenText");
+        }  
+        
+}
+
+//Every system needs some funny we do that with name of user 
+
+function nameFunny (i) {
+    if (name.value.length !== 0) {
+        message[0].setAttribute("class" , "greenText")
+        message[0].innerHTML = (" What a beatiful name " + i.value + " :)") 
+
+    }
+
+
+}
+
+function lastNameFunny (i) {
+
+    if(lastName.value.length !== 0) {
+        message[1].setAttribute("class" , "greenText") 
+        message[1].innerHTML = ("I think we are not relative :) ")
+    }
+  
 }
 
         /*

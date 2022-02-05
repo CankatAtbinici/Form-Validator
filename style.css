@@ -18,3 +18,9 @@
     font-family: system-ui;
     font-style: italic;
 }
+.greenText{
+    color:green;
+    font-size: 12px;
+    font-family: system-ui;
+    font-style: italic;
+}
