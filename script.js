@@ -9,27 +9,51 @@ let phoneNumber = document.getElementById("phoneNumber");
 let email = document.getElementById("email");
 let register = document.getElementById("register");
 let submit = document.getElementById("submitBtn");
+let message = document.querySelectorAll("td.message");
 
 
-
+console.log(message);
 
 
 form.addEventListener("submit", function (x)  {
     checkFormElement ([name , lastName , userName , password , repassword , phoneNumber , email]);
     // passwordCOntrol(password.value , repassword.value);
-    x.preventDefault();
+    checkLenght(password , 15 , 7);
     emailValidator();
-
+    x.preventDefault();
 } )
+
+//CHECH PASSWORDS SAME 
+
+ /*
+ function passwordCOntrol(first , second) {
+ } */
+
+
+
+
+//Chech PassWords Lenght
+function checkLenght (input , maximum, minimum ){
+        if (input.value.length < minimum) {
+                        if(input.value.length === 0) {
+                            message[3].innerHTML = "";
+        }                else{message[3].innerHTML = ("Min 8 character")} 
+        } else if (input.value.length> maximum) {
+            message[3].innerHTML = ("Max 15 character")
+        } else if (input.value.length> minimum && input.value.length<maximum){
+            message[3].innerHTML = "";
+        }
+ }
+
 
 // İS EMAİL REAL VALİDATOR
 //Regexp from : https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript 
-const validateEmail = (stringData) => {
+function validateEmail(stringData) {
     return String(stringData)
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+}
 
 
 
@@ -40,18 +64,16 @@ function emailValidator ( ) {
         email.className = "error"
     }
 }
-
-
-
+function error (i) {
+    i.className = "error";
+}
 // checking no empty space in form // Used forEach but other method staying comment under the this function
 function checkFormElement(e) {
     e.forEach(function (input) {
         if(input.value === ""){
-            input.className = "error";
-            input.setAttribute("placeholder" , "Required Space")
+            error(input);
          }else{
              input.className = "success";
-           
          }
     })
 }
@@ -112,16 +134,9 @@ e.preventDefault();
 
 
 
- /*
- function passwordCOntrol(first , second) {
-    console.log(first );
-    console.log(second);
-         if ((first) != ( ı )) {
-            console.log("sifreler eşleşmedi");
-       } else if ((first) === (second )){
-           console.log("şifreler eşleşti");
-       }
- } */
+
+
+
 
 
 
@@ -130,7 +145,6 @@ e.preventDefault();
 
 
   
- 
 
 
 
