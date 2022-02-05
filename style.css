@@ -8,3 +8,6 @@
 .error{
     border-block-color: red;
 }
+.success{
+    border-block-color: green;
+}
