@@ -30,6 +30,8 @@ form.addEventListener("submit", function (x)  {
 function checkPasswords (firstPassword ,secondPassword) {
     if (firstPassword !== secondPassword) {
         alert("passwords did not match");
+        message[4].innerHTML = ("passwords did not match");
+        message[4].setAttribute("class" , "message");
         error(password);
         error(repassword);
     }else if(firstPassword == secondPassword) {
